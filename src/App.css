@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+
+
+.App-header {
+  background-color: #cf9641;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial Black;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(49px + 2vmin);
+  color: rgb(255, 255, 255);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
