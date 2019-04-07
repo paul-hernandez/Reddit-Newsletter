@@ -11,8 +11,15 @@ class App extends React.Component {
       searchTerm: "undefined",
       isLoaded: false,
       items: [],
-      searchHint: "Search..."
+      searchHint: "Search...",
+      shuffledBool: false,
     }
+  }
+
+  handleCheckmark = (e) => {
+    this.setState({
+      shuffledBool: !this.state.shuffledBool
+    });
   }
 
 
@@ -26,16 +33,12 @@ class App extends React.Component {
       .then(json => {
         var data = []
         for (var i = 0; i < 5; i++) {
-            data.push(<li>{json.data.children[i].data.subreddit} : <a href={json.data.children[i].data.url}>{json.data.children[i].data.title} </a>
-              <a href={json.data.children[i].data.url}><img 
-              onError={(e)=>{e.target.onerror = null;
-                 e.target.src="http://i.imgur.com/sdO8tAw.png";
-                e.target.width="30"; e.target.height="30";}}
-              src={json.data.children[i].data.url}
-              alt={json.data.children[i].data.title}
-              width="500"
-              height="600"
-            /></a></li>);
+            data.push({
+              subreddit: json.data.children[i].data.subreddit,
+              title: json.data.children[i].data.title,
+              url: json.data.children[i].data.url,
+            });
+
         }
         this.setState({
           isLoaded: true,
@@ -44,9 +47,11 @@ class App extends React.Component {
         })
         
       })
+      
   }
 
   render() {
+    
     return (
       <div className="App">
         <header className="App-header">
@@ -54,8 +59,8 @@ class App extends React.Component {
         </header>
         <p>Welcome to my app</p>
         <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch}/>
-        <Options/>
-        <Posts isLoaded={this.state.isLoaded} items={this.state.items}  />
+        <Options handleCheckmark={this.handleCheckmark}/>
+        <Posts key={new Date().getTime()} isLoaded={this.state.isLoaded} items={this.state.items} shuffled={this.state.shuffledBool}  />
       </div>
     );
   }

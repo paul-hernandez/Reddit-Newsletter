@@ -34,7 +34,7 @@ class SearchBar extends React.Component {
                     <input type="text" placeholder={this.props.searchWord} onChange={this.handleChange} />
                     <button>Search :)</button>
                 </form>
-            
+            {this.state.searchWord}
             </div>
             
         )
