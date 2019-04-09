@@ -6,6 +6,7 @@ class SearchBar extends React.Component {
         super(props);
         this.state = {
             searchWord: null,
+            email: null,
         }
     }
 
@@ -13,6 +14,10 @@ class SearchBar extends React.Component {
         this.setState({
             searchWord: e.target.value,
         });
+    }
+
+    handleEmailChange = (e) => {
+        this.props.updateEmail(e);
     }
 
     handleSubmit = (e) => {
@@ -32,6 +37,7 @@ class SearchBar extends React.Component {
             <div>
                 <form id="search-input-box" onSubmit={this.handleSubmit}>
                     <input type="text" placeholder={this.props.searchWord} onChange={this.handleChange} />
+                    <input type="text" placeholder={"Email"} onChange={this.handleEmailChange} />
                     <button>Search :)</button>
                 </form>
             {this.state.searchWord}

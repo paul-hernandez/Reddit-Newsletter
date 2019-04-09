@@ -11,10 +11,6 @@ function shuffle(a) {
   return b;
 }
 
-function checkURL(url) {
-  return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
-}
-
 class Posts extends React.Component {
 
 
@@ -50,8 +46,8 @@ class Posts extends React.Component {
                             onError={(e)=>{ e.target.onerror = null;
                             e.target.src="http://i.imgur.com/sdO8tAw.png";
                             e.target.width="30"; e.target.height="30";}}
-                            width ="100"
-                            height = "100"
+                            width ="100px"
+                            height = "100px"
                         />
                       </a>
                       </p>
