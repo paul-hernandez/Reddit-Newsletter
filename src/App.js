@@ -4,6 +4,7 @@ import Posts from './components/Posts';
 import SearchBar from './components/SearchBar';
 import Options from './components/Options';
 import * as firebase from 'firebase';
+import Subreddits from './components/Subreddits';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,19 @@ class App extends React.Component {
     })
 
   }
+
+
+  deleteSubreddit = (e) => {
+    var index = this.state.SubsInfo.findIndex(x => x.subredditName === e);
+    if (index !== -1) {
+      var temp = this.state.SubsInfo
+      temp.splice(index,1)
+      this.setState({
+        SubsInfo: this.state.SubsInfo,
+      })
+    }  
+    }
+  
   handleCheckmark = (e) => {
     this.setState({
       shuffledBool: !this.state.shuffledBool
@@ -32,17 +46,15 @@ class App extends React.Component {
   }
 
   uploadToDatabase = () => {
-    var database = firebase.database();
-
-    var ref = database.ref('subreddits');
-  
-    var userData = {
-      subreddits: this.state.SubsInfo,
-      email: this.state.email
-    }
-    ref.push(userData);
+    const db = firebase.firestore();
+      db.settings({
+        timestampsInSnapshots: true
+      });
+    const userRef = db.collection('users').add({
+      email: this.state.email,
+      subreddits: this.state.SubsInfo
+    });  
     alert(this.state.email);
-
   }
 
 
@@ -93,9 +105,12 @@ class App extends React.Component {
         <p>Welcome to my app</p>
         <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch} updateEmail={this.updateEmail}/>
         <button onClick={this.uploadToDatabase}>Submit All</button>
-        <Options handleCheckmark={this.handleCheckmark}/>
+        <Options handleCheckmark={this.handleCheckmark} />
+        <Subreddits className="App"  SubsInfo={this.state.SubsInfo} deleteSub={this.deleteSubreddit}/>
         <Posts key={new Date().getTime()} isLoaded={this.state.isLoaded} items={this.state.items} shuffled={this.state.shuffledBool}  />
         
+
+
       </div>
     );
   }
