@@ -1,10 +1,9 @@
 import React from 'react'
+import Subreddit from './Subreddit'
+
 
 
 class Subreddits extends React.Component {
-
-    
-
 
 
     render () {
@@ -14,13 +13,19 @@ class Subreddits extends React.Component {
             <div>nothing</div>)
         } else {
             return (
-                <ul> 
-                {this.props.SubsInfo.map((post, id) => {
-                    return (<li key={id}>{post.subredditName} : {post.count} <button onClick={(e) => {this.props.deleteSub(post.subredditName)}}>Delete</button></li>);
-                })
-                }
-                <button onClick={() => this.handleClick("all")}>b</button>
-                 </ul>
+                <div className="card card-body my-3">
+                    <ul className="list-group my-5"> 
+                    {this.props.SubsInfo.map((post, id) => {
+                        return (<li key={id}>
+                                
+                                <Subreddit  deleteSub={this.props.deleteSub} post={post}/>
+                                
+                                </li>);
+                    })
+                    }
+                    </ul>
+                </div>
+                 
             )
         }
         

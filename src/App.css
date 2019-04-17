@@ -1,23 +1,29 @@
 .App {
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: rgb(139, 167, 219);
 }
 
 
 
 .App-header {
-  background-color: #cf9641;
+  background-color: #27e79e;
   min-height: 20vh;
   display: flex;
   flex-direction: column;
-  font-family: Arial Black;
+  font-family: Arial;
   align-items: center;
   justify-content: center;
-  font-size: calc(49px + 2vmin);
+  font-size: calc(40px + 2vmin);
   color: rgb(255, 255, 255);
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.Subreddit-list{
+  background-color: black;
 }
 
 

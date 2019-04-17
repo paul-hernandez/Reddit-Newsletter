@@ -32,13 +32,17 @@ class Posts extends React.Component {
         items = shuffle(items);
         } 
           return (
-            <div>
-              <h1 align='center'>feed: </h1>
-              <ol>
+            <div className = "card card-body">
+              <h1 className="card-header bg-primary"align='center'>Sample feed: </h1>
+              <ol >
                 {items.map((post, idx) => {
                   return (
-                    <li key={idx}>
-                      <p>{post.subreddit}: 
+                    <li className="card bg-secondary my-1" align="center" key={idx}>
+                      <p>
+                        <div className="card-header">
+                        {post.subreddit}:
+                        </div>
+                         
                       <a href={post.url}>
                       {post.title}
                       <img src={post.url}
@@ -55,7 +59,8 @@ class Posts extends React.Component {
                   );
                   })
                 }
-              </ol> </div>
+              </ol> 
+              </div>
           );
     
 }

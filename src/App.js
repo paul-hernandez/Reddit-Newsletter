@@ -6,6 +6,9 @@ import Options from './components/Options';
 import * as firebase from 'firebase';
 import Subreddits from './components/Subreddits';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import uuid from 'uuid';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,7 @@ class App extends React.Component {
     }
   }
   updateEmail = (e) => {
-    console.log("got here")
+    console.log("Email updated")
     this.setState({
       email: e.target.value,
     })
@@ -31,11 +34,21 @@ class App extends React.Component {
   deleteSubreddit = (e) => {
     var index = this.state.SubsInfo.findIndex(x => x.subredditName === e);
     if (index !== -1) {
-      var temp = this.state.SubsInfo
+      var temp = this.state.SubsInfo;
+      var counter = 0;
+      for (var i = 0; i < index; i++) {
+        console.log(this.state.SubsInfo[i].count);
+        counter += this.state.SubsInfo[i].count;
+      }
+      console.log("starting", counter);
+      var tempItems = this.state.items;
+      tempItems.splice(counter,this.state.SubsInfo[index].count);
       temp.splice(index,1)
       this.setState({
-        SubsInfo: this.state.SubsInfo,
+        items: tempItems,
+        SubsInfo: temp,
       })
+      
     }  
     }
   
@@ -100,13 +113,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          
+          Newsletter
         </header>
-        <p>Welcome to my app</p>
+        <p>Your favorite subreddits delivered daily</p>
         <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch} updateEmail={this.updateEmail}/>
         <button onClick={this.uploadToDatabase}>Submit All</button>
         <Options handleCheckmark={this.handleCheckmark} />
-        <Subreddits className="App"  SubsInfo={this.state.SubsInfo} deleteSub={this.deleteSubreddit}/>
+        <Subreddits className="Subreddit-list"  SubsInfo={this.state.SubsInfo} deleteSub={this.deleteSubreddit}/>
         <Posts key={new Date().getTime()} isLoaded={this.state.isLoaded} items={this.state.items} shuffled={this.state.shuffledBool}  />
         
 
