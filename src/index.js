@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import * as firebase from 'firebase';
 require('dotenv').config();
 
-const firebaseConfig = {
+var firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
     databaseURL: process.env.REACT_APP_FIREBASE_DATAURL,
