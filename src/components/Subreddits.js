@@ -1,5 +1,6 @@
 import React from 'react'
 import Subreddit from './Subreddit'
+import SubmitEmail from './SubmitEmail'
 
 
 
@@ -16,6 +17,8 @@ class Subreddits extends React.Component {
         } else {
             return (
                 <div className="card card-body my-3">
+                <SubmitEmail updateEmail={this.props.updateEmail} updateTime={this.props.updateTime}/>
+                <button onClick={this.props.updateDatabase}>Submit All</button>
                     <ul className="list-group my-5"> 
                     {this.props.SubsInfo.map((post, id) => {
                         return (<li key={id}>

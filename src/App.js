@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
 import Subreddits from './components/Subreddits';
 
 
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
@@ -21,7 +22,7 @@ class App extends React.Component {
       shuffledBool: false,
       SubsInfo: [],
       email: "",
-      time: "0900",
+      time: "12:00",
     }
   }
   updateEmail = (e) => {
@@ -209,22 +210,26 @@ class App extends React.Component {
 
  
 
+
+    
+
     
     return (
       <div className="App">
         <header className="App-header">
-          Newsletter
+          R-DAILY
         </header>
-        <p>delivered daily</p>
+        <p>Your favorite /r/'s delivered daily. </p>
         <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch}/>
-        <SubmitEmail updateEmail={this.updateEmail} updateTime={this.updateTime}/>
-        <button onClick={this.uploadToDatabase}>Submit All</button>
-        <Options handleCheckmark={this.handleCheckmark} />
+        
         <Subreddits className="Subreddit-list"
           SubsInfo={this.state.SubsInfo}
           deleteSub={this.deleteSubreddit} 
           editSub={this.editSubreddit}
           saveSub={this.saveSubreddit}
+          updateEmail={this.updateEmail}
+          updateTime={this.updateTime}
+          updateDatabase={this.uploadToDatabase}
           />
         <Posts key={new Date().getTime()} isLoaded={this.state.isLoaded} items={this.state.items} shuffled={this.state.shuffledBool}  />
         

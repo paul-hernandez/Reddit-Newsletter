@@ -5,15 +5,14 @@ class SubmitEmail extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                    <div className="input-group">
-                        <div className="input-group-prepend">
-                            <div className="input-group-text bg-primary text-white">
+                    <div >
+                        <div >
+                            <div>
                             <i className ="fas fa-book"/>
                             </div>
                         </div>
                         <input 
-                            type="text"
-                            className="form-control" 
+                            type="text" 
                             placeholder="Email" 
                             onChange ={this.props.updateEmail}
                         />

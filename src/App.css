@@ -1,20 +1,20 @@
 .App {
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  background-color: rgb(139, 167, 219);
+  background-color: #f55a21b9;
 }
 
 
 
 .App-header {
-  background-color: #27e79e;
+  background-color: #fa5a20;
   min-height: 20vh;
   display: flex;
   flex-direction: column;
-  font-family: Arial;
+  font-family: 'Overpass', sans-serif;
   align-items: center;
   justify-content: center;
-  font-size: calc(40px + 2vmin);
+  font-size: calc(60px + 2vmin);
   color: rgb(255, 255, 255);
 }
 

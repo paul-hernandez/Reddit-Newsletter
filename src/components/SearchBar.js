@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchBar.css';
 
 
 class SearchBar extends React.Component {
@@ -34,22 +35,19 @@ class SearchBar extends React.Component {
    
     render () {
         return (
-            <div className="card card-body my-3">
+            <div >
                 <form id="search-input-box" onSubmit={this.handleSubmit}>
-                    <div className="input-group">
-                        <div className="input-group-prepend">
-                            <div className="input-group-text bg-primary text-white">
-                            <i className ="fas fa-book"/>
-                            </div>
+                    <div >
+                        <div >
                         </div>
+                        r/
                         <input 
                             type="text"
-                            className="form-control" 
                             placeholder={this.props.searchWord} 
                             onChange ={this.handleChange}
                         />
                     </div>
-                    <button className="btn btn-block btn-primary mt-3" type="submit">Search</button>
+                    <button type="submit">Search</button>
                 </form>
             </div>
             
