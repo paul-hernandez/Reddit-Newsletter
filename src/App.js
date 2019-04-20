@@ -2,12 +2,13 @@ import React from 'react';
 import './App.css';
 import Posts from './components/Posts';
 import SearchBar from './components/SearchBar';
+import SubmitEmail from './components/SubmitEmail';
 import Options from './components/Options';
 import * as firebase from 'firebase';
 import Subreddits from './components/Subreddits';
 
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import uuid from 'uuid';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class App extends React.Component {
       shuffledBool: false,
       SubsInfo: [],
       email: "",
+      time: "0900",
     }
   }
   updateEmail = (e) => {
@@ -29,6 +31,16 @@ class App extends React.Component {
     })
 
   }
+
+  updateTime = (timeString) => {
+    console.log("Time updated")
+    this.setState({
+      time: timeString,
+    })
+
+  }
+
+
 
 
   deleteSubreddit = (e) => {
@@ -58,29 +70,112 @@ class App extends React.Component {
     });
   }
 
+  validateEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
   uploadToDatabase = () => {
+    if (this.validateEmail(this.state.email) === false) {
+      alert("Please type in a valid email address");
+      return;
+    }
+
     const db = firebase.firestore();
       db.settings({
         timestampsInSnapshots: true
       });
-    const userRef = db.collection('users').add({
-      email: this.state.email,
-      subreddits: this.state.SubsInfo
-    });  
-    alert(this.state.email);
+    //const userRef = 
+    db.collection("users").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          if (doc.data().email === this.state.email) {
+            alert("in database :o, deleting...")
+            db.collection("users").doc(doc.id).delete().then(function() {
+              console.log("Document successfully deleted!");
+          }).catch(function(error) {
+              console.error("Error removing document: ", error);
+          });
+          }
+      });
+      db.collection('users').add({
+        email: this.state.email,
+        time: this.state.time,
+        subreddits: this.state.SubsInfo
+      });  
+      alert(this.state.email);
+  });
+  
+    
   }
 
 
-  newSearch = (searchTerm) => {
+  editSubreddit = (e) => {
+    var temp = this.state.SubsInfo;
+    for (var i=0; i < temp.length; i++){
+      if (temp[i].subredditName === e) {
+        temp[i].edit = true;
+      }
+    }
+    this.setState({
+      SubsInfo: temp,
+    });
+  }
+
+  saveSubreddit = (subName, newCount, newOffset) => {
+    if (newCount + newOffset > 25){
+      alert("Error: Try a lower number of posts and/or offset.");
+      return;
+    }
+    console.log(subName)
+    console.log(newCount);
+    console.log(newOffset);
+    this.deleteSubreddit(subName);
+    this.newSearch(subName, newCount, newOffset);
+    // var temp = this.state.SubsInfo;
+    // for (var i=0; i < temp.length; i++){
+    //   if (temp[i].subredditName === subName) {
+    //     temp[i].count = newCount;
+    //     temp[i].offset = newOffset;
+    //     temp[i].edit = false;
+    //   }
+    // }
+    // this.setState({
+    //   SubsInfo: temp,
+    // });
+  }
+
+  newSearch = (searchTerm, numPosts, offset) => {
+
+    for (var i = 0; i < this.state.SubsInfo.length; i++) {
+      if (this.state.SubsInfo[i].subredditName.toLowerCase() === searchTerm.toLowerCase()) {
+        alert ("That subreddit was already added to your list.");
+        return;
+      }
+    }
+    
+    console.log("offset:", offset);
+    console.log("numposts:",numPosts);
     this.setState({
       searchTerm: searchTerm,
       searchHint: "Search again...",
     });
     fetch('https://www.reddit.com/r/' + searchTerm + '/.json')
-      .then(res => res.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong.');
+        }
+      })
       .then(json => {
+        
+        if (json.data.children[1] === undefined) {
+          alert("That subreddit does not exist :( please try again");
+          return;
+        }
+
         var data = []
-        for (var i = 2; i < 7; i++) {
+        for (var i = offset; i < (numPosts + offset); i++) {
             data.push({
               subreddit: json.data.children[i].data.subreddit,
               title: json.data.children[i].data.title,
@@ -91,7 +186,10 @@ class App extends React.Component {
         }
         var SubInfo = {
           subredditName: searchTerm,
-          count: 5,
+          count: numPosts,
+          offset: offset, 
+          edit: false,
+          
         }
         this.setState({
           isLoaded: true,
@@ -105,6 +203,8 @@ class App extends React.Component {
       
   }
 
+
+
   render() {
 
  
@@ -115,11 +215,17 @@ class App extends React.Component {
         <header className="App-header">
           Newsletter
         </header>
-        <p>Your favorite subreddits delivered daily</p>
-        <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch} updateEmail={this.updateEmail}/>
+        <p>delivered daily</p>
+        <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch}/>
+        <SubmitEmail updateEmail={this.updateEmail} updateTime={this.updateTime}/>
         <button onClick={this.uploadToDatabase}>Submit All</button>
         <Options handleCheckmark={this.handleCheckmark} />
-        <Subreddits className="Subreddit-list"  SubsInfo={this.state.SubsInfo} deleteSub={this.deleteSubreddit}/>
+        <Subreddits className="Subreddit-list"
+          SubsInfo={this.state.SubsInfo}
+          deleteSub={this.deleteSubreddit} 
+          editSub={this.editSubreddit}
+          saveSub={this.saveSubreddit}
+          />
         <Posts key={new Date().getTime()} isLoaded={this.state.isLoaded} items={this.state.items} shuffled={this.state.shuffledBool}  />
         
 

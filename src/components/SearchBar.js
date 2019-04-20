@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.state.searchWord) {
-        this.props.newSearch(this.state.searchWord);
+        this.props.newSearch(this.state.searchWord, 5, 0);
         }
         this.setState({
             searchWord: null,
@@ -47,12 +47,6 @@ class SearchBar extends React.Component {
                             className="form-control" 
                             placeholder={this.props.searchWord} 
                             onChange ={this.handleChange}
-                        />
-                        <input 
-                            type="text"
-                            className="form-control" 
-                            placeholder="Email" 
-                            onChange ={this.handleEmailChange}
                         />
                     </div>
                     <button className="btn btn-block btn-primary mt-3" type="submit">Search</button>
