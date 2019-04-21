@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  background-color: #f55a21b9;
+  background-color: #ebae98b9;
+  min-height: 100vh;
 }
 
 
@@ -14,8 +15,16 @@
   font-family: 'Overpass', sans-serif;
   align-items: center;
   justify-content: center;
-  font-size: calc(60px + 2vmin);
+  font-size: calc(70px + 2vmin);
   color: rgb(255, 255, 255);
+}
+
+.App-subheader {
+  background-color: #dbdbdba1;
+  font-size: calc(10px + 2vmin);
+
+  font-family: 'Overpass', sans-serif;
+
 }
 
 .App-link {

@@ -13,6 +13,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   constructor(props) {
+    var SubInfo = {
+      subredditName: "Nootropics",
+      count: 5,
+      offset: 0, 
+      edit: false,
+      
+    }
     super(props);
     this.state = {
       searchTerm: "undefined",
@@ -20,7 +27,7 @@ class App extends React.Component {
       items: [],
       searchHint: "Search...",
       shuffledBool: false,
-      SubsInfo: [],
+      SubsInfo: [SubInfo],
       email: "",
       time: "12:00",
     }
@@ -217,11 +224,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          R-DAILY
+          RDAILY.NET
         </header>
-        <p>Your favorite /r/'s delivered daily. </p>
+        <p className="App-subheader">YOUR FAVORITE <font color="white" size="5.5">/r/</font>'s DELIVERED DAILY</p>
+
         <SearchBar searchWord={this.state.searchHint} newSearch={this.newSearch}/>
-        
+    
         <Subreddits className="Subreddit-list"
           SubsInfo={this.state.SubsInfo}
           deleteSub={this.deleteSubreddit} 

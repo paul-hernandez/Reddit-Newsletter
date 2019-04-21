@@ -15,9 +15,6 @@ var firebaseConfig = {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID
 }
 
-console.log("hello");
-console.log(process.env.REACT_APP_FIREBASE_CONFIGG);
-console.log("hello")
 firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(<App />, document.getElementById('root'));

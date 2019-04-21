@@ -36,7 +36,7 @@ class Subreddit extends React.Component {
     render () {
 
         if (this.props.post.edit === true) {
-            return (<div className="card card-body my-3 bg-info">
+            return (<div >
             {this.props.post.subredditName}
     <input type="text" placeHolder={this.props.post.count} onChange={this.updateCount}/> 
     <input type="text" placeHolder={this.props.post.offset} onChange={this.updateOffset}/> 
@@ -44,10 +44,10 @@ class Subreddit extends React.Component {
     <button onClick={this.saveSubreddit}>Save </button>
     </div>)
         } else {
-        return(<div className="card card-body my-3 bg-secondary">
+        return(<div >
                 {this.props.post.subredditName}
-        <p>{this.props.post.count}</p>
-        <p>{this.props.post.offset}</p>
+        <span>{this.props.post.count}</span>
+        <span>{this.props.post.offset}</span>
         <button onClick={(e) => {this.props.deleteSub(this.props.post.subredditName)}}>Delete</button>
         <button onClick={(e) => {this.props.editSub(this.props.post.subredditName)}}>Edit </button>
         </div>)
