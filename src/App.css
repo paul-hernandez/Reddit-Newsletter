@@ -15,13 +15,13 @@
   font-family: 'Overpass', sans-serif;
   align-items: center;
   justify-content: center;
-  font-size: calc(70px + 2vmin);
+  font-size: calc(45px + 2vmin);
   color: rgb(255, 255, 255);
 }
 
 .App-subheader {
   background-color: #dbdbdba1;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(6px + 2vmin);
 
   font-family: 'Overpass', sans-serif;
 

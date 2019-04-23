@@ -27,16 +27,16 @@ class Subreddits extends React.Component {
 
         if (this.props.SubsInfo.length === 0){ 
             return (
-            <div>nothing</div>)
+            <div></div>)
 
         
         } else {
             return (
-                <div className="todoListMain">
+                <div className="todoListMain"align="center">
             
                 <SubmitEmail updateEmail={this.props.updateEmail} updateTime={this.props.updateTime}/>
-                <button onClick={this.props.updateDatabase}>Submit All</button>
-                    <ul className="theList" > 
+                <button onClick={this.props.updateDatabase}>Recieve Daily Feed!</button>
+                    <ul className="theList"> 
                     {this.props.SubsInfo.map((post, id) => {
                         return (<li key={id}>
                                 <Subreddit

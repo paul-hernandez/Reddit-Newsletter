@@ -13,21 +13,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   constructor(props) {
-    var SubInfo = {
-      subredditName: "Nootropics",
-      count: 5,
-      offset: 0, 
-      edit: false,
-      
-    }
+    
     super(props);
     this.state = {
       searchTerm: "undefined",
       isLoaded: false,
       items: [],
-      searchHint: "Search...",
+      searchHint: "Search all subreddits...",
       shuffledBool: false,
-      SubsInfo: [SubInfo],
+      SubsInfo: [],
       email: "",
       time: "12:00",
     }

@@ -1,11 +1,5 @@
 input[type=text] {
-    width: 110px;
-    /*-webkit-transition: width 0.5s ease-in-out;*/
-    transition: width 0.5s ease-in-out;
+    width: 180px;
+    border-radius: 10%;
     
-  }
-  
-  /* When the input field gets focus, change its width to 100% */
-  input[type=text]:focus {
-    width: 25%;
-  }
+}

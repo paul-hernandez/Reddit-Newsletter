@@ -20,16 +20,17 @@
   }
   .todoListMain .theList {
     list-style: none;
-    padding-left: 0;
-    width: 250px;
+    padding-left: 100;
+    width: 300px;
   } 
   .todoListMain .theList li {
     color: #333;
     background-color: rgba(255,255,255,.5);
-    padding: 15px;
+    padding: 10px;
     margin-bottom: 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     list-style: none;
+    margin-left: 10px;
   }
   ul.theList {
     padding: 0;

@@ -23,7 +23,7 @@ class Posts extends React.Component {
       var isLoaded = this.props.isLoaded;
         
       if (!isLoaded) {
-        return <div><br/>Posts will appear here</div>
+        return (<div/>)
       }
 
       var items = this.props.items;
@@ -32,8 +32,8 @@ class Posts extends React.Component {
         items = shuffle(items);
         } 
           return (
-            <div className = "card card-body">
-              <h1 className="card-header bg-primary"align='center'>Sample feed: </h1>
+            <div>
+              <h4 align='center'><strong>Sample feed: </strong></h4>
               <ol >
                 {items.map((post, idx) => {
                   return (

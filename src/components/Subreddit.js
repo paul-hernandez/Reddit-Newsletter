@@ -38,18 +38,19 @@ class Subreddit extends React.Component {
         if (this.props.post.edit === true) {
             return (<div >
             {this.props.post.subredditName}
-    <input type="text" placeHolder={this.props.post.count} onChange={this.updateCount}/> 
-    <input type="text" placeHolder={this.props.post.offset} onChange={this.updateOffset}/> 
+    <input type="text" placeHolder={"Posts:"  + this.props.post.count}  onChange={this.updateCount}/> 
+    <input type="text" placeHolder={"Offset:" + this.props.post.offset}  onChange={this.updateOffset}/> 
     <button onClick={(e) => {this.props.deleteSub(this.props.post.subredditName)}}>Delete</button>
     <button onClick={this.saveSubreddit}>Save </button>
     </div>)
         } else {
-        return(<div >
-                {this.props.post.subredditName}
-        <span>{this.props.post.count}</span>
-        <span>{this.props.post.offset}</span>
-        <button onClick={(e) => {this.props.deleteSub(this.props.post.subredditName)}}>Delete</button>
+        return(<div>
+                <strong>r/{this.props.post.subredditName.toLowerCase()}</strong>
+        <span>: Posts:{this.props.post.count}, </span>
+        <span>Offset:{this.props.post.offset}</span>
         <button onClick={(e) => {this.props.editSub(this.props.post.subredditName)}}>Edit </button>
+        <button onClick={(e) => {this.props.deleteSub(this.props.post.subredditName)}}>Delete</button>
+        
         </div>)
         }
     }
